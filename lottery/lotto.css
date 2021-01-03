@@ -1,0 +1,44 @@
+.background{
+  background-color: #eeeeee;
+}
+.numbers{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.number{
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  color: white;
+  font-size: 30pt;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.number.red{
+  background-color: #ff5555;
+}
+.number.blue{
+  background-color: #5555ff;
+}
+.number.green{
+  background-color: #00ff00;
+}
+.number.yellow{
+  background-color: #ffcc00;
+}
+.number.orange{
+  background-color: orange;
+}
+.number.purple{
+  background-color: #ff00ff;
+}
+.btn{
+  width: auto;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #dddddd;
+}
