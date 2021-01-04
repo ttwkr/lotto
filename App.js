@@ -35,25 +35,18 @@ const App = () => {
           <View style={styles.numbers}>
             {num.map((curr, idx) => {
               let style_number;
-              switch (curr) {
-                case curr < 10:
-                  style_number = styles.red;
-                  break;
-                case curr < 20:
-                  style_number = styles.blue;
-                  break;
-                case curr < 30:
-                  style_number = styles.green;
-                  break;
-                case curr < 40:
-                  style_number = styles.yellow;
-                  break;
-                case curr < 50:
-                  style_number = styles.purple;
-                  break;
-                default:
-                  style_number = styles.orange;
+              if (curr > 0 && curr < 10) {
+                style_number = styles.red;
+              } else if (curr >= 10 && curr < 20) {
+                style_number = styles.blue;
+              } else if (curr >= 20 && curr < 30) {
+                style_number = styles.green;
+              } else if (curr >= 30 && curr < 40) {
+                style_number = styles.yellow;
+              } else if (curr >= 40 && curr < 50) {
+                style_number = styles.purple;
               }
+
               return (
                 <View style={[styles.number, style_number]}>
                   <Text key={idx} style={styles.text}>
