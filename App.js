@@ -3,11 +3,14 @@ import {View, Text, Button, SafeAreaView, StyleSheet} from 'react-native';
 
 const App = () => {
   const [num, setNum] = useState([]);
+  const [bonusNum, setBonusNum] = useState();
 
   const randomNumber = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    let num = Math.floor(Math.random() * (max - min + 1)) + min;
+    setBonusNum(num);
+    return num;
   };
 
   const lottoNumber = () => {
@@ -32,30 +35,40 @@ const App = () => {
       <View>
         <Text>Lotto!!!</Text>
         <View style={styles.background}>
-          <View style={styles.numbers}>
-            {num.map((curr, idx) => {
-              let style_number;
-              if (curr > 0 && curr < 10) {
-                style_number = styles.red;
-              } else if (curr >= 10 && curr < 20) {
-                style_number = styles.blue;
-              } else if (curr >= 20 && curr < 30) {
-                style_number = styles.green;
-              } else if (curr >= 30 && curr < 40) {
-                style_number = styles.yellow;
-              } else if (curr >= 40 && curr < 50) {
-                style_number = styles.purple;
-              }
+          {num.length === 0 && bonusNum === '' ? (
+            <Text>버튼을 눌러주세요</Text>
+          ) : (
+            <View style={styles.numbers}>
+              {num.map((curr, idx) => {
+                let style_number;
+                if (curr > 0 && curr < 10) {
+                  style_number = styles.red;
+                } else if (curr >= 10 && curr < 20) {
+                  style_number = styles.blue;
+                } else if (curr >= 20 && curr < 30) {
+                  style_number = styles.green;
+                } else if (curr >= 30 && curr < 40) {
+                  style_number = styles.yellow;
+                } else if (curr >= 40 && curr < 50) {
+                  style_number = styles.purple;
+                }
 
-              return (
-                <View style={[styles.number, style_number]}>
-                  <Text key={idx} style={styles.text}>
-                    {curr}
-                  </Text>
-                </View>
-              );
-            })}
-          </View>
+                return (
+                  <View style={[styles.number, style_number]}>
+                    <Text key={idx} style={styles.text}>
+                      {curr}
+                    </Text>
+                  </View>
+                );
+              })}
+              <View>
+                <Text>+</Text>
+              </View>
+              <View style={[styles.number, styles.orange]}>
+                <Text style={styles.text}>{bonusNum}</Text>
+              </View>
+            </View>
+          )}
         </View>
         <Button
           style={styles.btn}
@@ -80,7 +93,7 @@ const styles = StyleSheet.create({
   },
 
   number: {
-    margin: 10,
+    margin: 5,
     width: 45,
     height: 45,
     fontSize: 30,
