@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "58352709513",
+    "project_id": "lotto-551a2",
+    "storage_bucket": "lotto-551a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58352709513:android:95a3d24ef9bc2d7ee13b58",
+        "android_client_info": {
+          "package_name": "com.lotto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58352709513-ootepvdp2vupboh93edb3u6d7gv7cnsh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lotto",
+            "certificate_hash": "57acc1877e35e40ecd6db0ced46e0a4e4c30a50b"
+          }
+        },
+        {
+          "client_id": "58352709513-qgda9jsdllt5neud0ui1tie415qknmrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtuBpN1jvk3MTlxpWowzcs5TR9SvFprpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58352709513-qgda9jsdllt5neud0ui1tie415qknmrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

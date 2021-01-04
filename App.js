@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Button, SafeAreaView, StyleSheet} from 'react-native';
+import {BannerAd, TestIds, BannerAdSize} from '@react-native-firebase/admob';
 
 const App = () => {
   const [num, setNum] = useState([]);
@@ -76,6 +77,7 @@ const App = () => {
           onPress={lottoNumber}
         />
       </View>
+      <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.FULL_BANNER} />
     </SafeAreaView>
   );
 };
