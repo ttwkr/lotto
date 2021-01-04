@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, SafeAreaView, StyleSheet} from 'react-native';
 
 const App = () => {
   const [num, setNum] = useState([]);
@@ -28,14 +28,104 @@ const App = () => {
     console.log(arr);
   };
   return (
-    <View>
-      <Text>Lotto!!!</Text>
-      {num.map((curr, idx) => {
-        return <Text key={idx}>{curr}</Text>;
-      })}
-      <Button title={'Random Number'} onPress={lottoNumber} />
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Lotto!!!</Text>
+        <View style={styles.background}>
+          <View style={styles.numbers}>
+            {num.map((curr, idx) => {
+              let style_number;
+              switch (curr) {
+                case curr < 10:
+                  style_number = styles.red;
+                  break;
+                case curr < 20:
+                  style_number = styles.blue;
+                  break;
+                case curr < 30:
+                  style_number = styles.green;
+                  break;
+                case curr < 40:
+                  style_number = styles.yellow;
+                  break;
+                case curr < 50:
+                  style_number = styles.purple;
+                  break;
+                default:
+                  style_number = styles.orange;
+              }
+              return (
+                <View style={[styles.number, style_number]}>
+                  <Text key={idx} style={styles.text}>
+                    {curr}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+        <Button
+          style={styles.btn}
+          title={'Random Number'}
+          onPress={lottoNumber}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: '#eeeeee',
+  },
+
+  numbers: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  number: {
+    margin: 10,
+    width: 45,
+    height: 45,
+    fontSize: 30,
+    borderRadius: 100,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  text: {
+    color: 'white',
+  },
+
+  red: {
+    backgroundColor: '#ff5555',
+  },
+  blue: {
+    backgroundColor: '#5555ff',
+  },
+  green: {
+    backgroundColor: '#00ff00',
+  },
+  yellow: {
+    backgroundColor: '#ffcc00',
+  },
+  orange: {
+    backgroundColor: 'orange',
+  },
+  purple: {
+    backgroundColor: '#ff00ff',
+  },
+
+  btn: {
+    width: 'auto',
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#dddddd',
+  },
+});
 
 export default App;
