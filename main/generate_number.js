@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import BannerAds from '../ads';
+import NumberList from './number_list';
+import Number from './number';
 
 /*
   숫자 생성구간
@@ -11,6 +13,15 @@ import BannerAds from '../ads';
 const GenerateNumber = () => {
   const [num, setNum] = useState([]);
   const [bonusNum, setBonusNum] = useState();
+  const [numObj, setNumObj] = useState({
+    list: '',
+    bonusNum: '',
+  });
+  const [numberList, setNumberList] = useState([]);
+
+  useEffect(() => {
+    addList();
+  }, [addList]);
 
   const randomNumber = (min, max) => {
     min = Math.ceil(min);
@@ -36,7 +47,14 @@ const GenerateNumber = () => {
         return a - b;
       }),
     );
-    console.log(arr);
+    setNumObj({
+      list: arr,
+      bonusNum: bonusNum,
+    });
+  };
+
+  const addList = () => {
+    setNumberList([...numberList, numberList.shift(numObj)]);
   };
   return (
     <SafeAreaView>
@@ -46,36 +64,7 @@ const GenerateNumber = () => {
           {num.length === 0 ? (
             <Text>버튼을 눌러주세요</Text>
           ) : (
-            <View style={styles.numbers}>
-              {num.map((curr, idx) => {
-                let style_number;
-                if (curr > 0 && curr < 10) {
-                  style_number = styles.red;
-                } else if (curr >= 10 && curr < 20) {
-                  style_number = styles.blue;
-                } else if (curr >= 20 && curr < 30) {
-                  style_number = styles.green;
-                } else if (curr >= 30 && curr < 40) {
-                  style_number = styles.yellow;
-                } else if (curr >= 40 && curr < 50) {
-                  style_number = styles.purple;
-                }
-
-                return (
-                  <View key={idx} style={[styles.number, style_number]}>
-                    <Text key={idx} style={styles.text}>
-                      {curr}
-                    </Text>
-                  </View>
-                );
-              })}
-              <View>
-                <Text>+</Text>
-              </View>
-              <View style={[styles.number, styles.orange]}>
-                <Text style={styles.text}>{bonusNum}</Text>
-              </View>
-            </View>
+            <Number num={num} bonusNum={bonusNum} />
           )}
         </View>
         <Button
@@ -84,6 +73,7 @@ const GenerateNumber = () => {
           onPress={lottoNumber}
         />
       </View>
+      <NumberList numberList={numberList} />
       <BannerAds />
     </SafeAreaView>
   );
