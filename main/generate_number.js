@@ -6,6 +6,7 @@ import {
   Text,
   View,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import BannerAds from '../ads';
 import NumberList from './number_list';
@@ -56,7 +57,7 @@ const GenerateNumber = () => {
         bonusNum: bonus_number,
       };
 
-      setNumberList([...numberList, obj]);
+      setNumberList([obj, ...numberList]);
     },
     [numberList],
   );
@@ -67,7 +68,7 @@ const GenerateNumber = () => {
         <Text>Lotto!!!</Text>
         <View style={styles.background}>
           {num.length === 0 ? (
-            <Text>버튼을 눌러주세요</Text>
+            <Text style={{height: 55}}>버튼을 눌러주세요</Text>
           ) : (
             <Number num={num} bonusNum={bonusNum} />
           )}
@@ -78,16 +79,18 @@ const GenerateNumber = () => {
           onPress={lottoNumber}
         />
       </View>
-      <ScrollView>
-        <NumberList numberList={numberList} />
-      </ScrollView>
+      <View style={{height: height}}>
+        <ScrollView>
+          <NumberList numberList={numberList} />
+        </ScrollView>
+      </View>
       <View>
         <BannerAds />
       </View>
     </SafeAreaView>
   );
 };
-
+let height = Dimensions.get('window').height - 190;
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#eeeeee',
