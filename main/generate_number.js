@@ -1,5 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from 'react-native';
 import BannerAds from '../ads';
 import NumberList from './number_list';
 import Number from './number';
@@ -13,15 +20,7 @@ import Number from './number';
 const GenerateNumber = () => {
   const [num, setNum] = useState([]);
   const [bonusNum, setBonusNum] = useState();
-  const [numObj, setNumObj] = useState({
-    list: '',
-    bonusNum: '',
-  });
   const [numberList, setNumberList] = useState([]);
-
-  useEffect(() => {
-    addList();
-  }, [addList]);
 
   const randomNumber = (min, max) => {
     min = Math.ceil(min);
@@ -47,15 +46,21 @@ const GenerateNumber = () => {
         return a - b;
       }),
     );
-    setNumObj({
-      list: arr,
-      bonusNum: bonusNum,
-    });
+    num_obj(arr, bonusNum);
   };
 
-  const addList = () => {
-    setNumberList([...numberList, numberList.shift(numObj)]);
-  };
+  const num_obj = useCallback(
+    (array, bonus_number) => {
+      const obj = {
+        list: array,
+        bonusNum: bonus_number,
+      };
+
+      setNumberList([...numberList, obj]);
+    },
+    [numberList],
+  );
+
   return (
     <SafeAreaView>
       <View>
@@ -73,8 +78,12 @@ const GenerateNumber = () => {
           onPress={lottoNumber}
         />
       </View>
-      <NumberList numberList={numberList} />
-      <BannerAds />
+      <ScrollView>
+        <NumberList numberList={numberList} />
+      </ScrollView>
+      <View>
+        <BannerAds />
+      </View>
     </SafeAreaView>
   );
 };
@@ -130,6 +139,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: '#dddddd',
+  },
+
+  numberList: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  ads: {
+    position: 'absolute',
+    bottom: 0,
   },
 });
 
