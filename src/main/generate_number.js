@@ -84,13 +84,13 @@ const GenerateNumber = () => {
           <NumberList numberList={numberList} />
         </ScrollView>
       </View>
-      <View style={styles.ads}>
+      <View>
         <BannerAds />
       </View>
     </SafeAreaView>
   );
 };
-let height = Dimensions.get('window').height - 100;
+let height = Dimensions.get('window').height - 250;
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#eeeeee',
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
   },
   ads: {
     backgroundColor: 'orange',
+    height: 100,
   },
 });
 
