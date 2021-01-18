@@ -1,8 +1,8 @@
 import React from 'react';
-import Main from './src/main';
+import Navi from './src/navigation';
 
 const App = () => {
-  return <Main />;
+  return <Navi />;
 };
 
 export default App;
